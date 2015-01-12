@@ -1,0 +1,9 @@
+[package]
+
+name = "rustircbot"
+version = "0.0.1"
+authors = ["David Reeve <nerdboy6@gmail.com>"]
+
+[dependencies.rustirc]
+
+git = "https://github.com/Lancey6/rust-irc"
