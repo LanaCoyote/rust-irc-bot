@@ -1,5 +1,8 @@
-extern crate regex;
 extern crate rustirc;
+
+pub mod bot;
+mod console;
+mod events;
 
 #[test]
 fn it_works() {
