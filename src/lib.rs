@@ -1,6 +1,7 @@
 extern crate rustirc;
 
 pub mod bot;
+mod callback;
 mod console;
 mod events;
 

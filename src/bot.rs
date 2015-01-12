@@ -5,16 +5,16 @@ use std::sync::mpsc;
 
 use events;
 
-struct Bot {
+struct Bot <'bl> {
   client : client::Client,
-  events : events::EventDispatcher,
+  events : events::EventDispatcher <'bl>,
 }
 
-impl Bot {
-  pub fn connect ( host : &str, port : &str, pass : &str, info : info::IrcInfo ) -> Bot {
+impl <'bl> Bot <'bl> {
+  pub fn connect <'a> ( host : &str, port : u16, pass : &str, info : info::IrcInfo, delim : char ) -> Bot <'a> {
     Bot {
       client : client::Client::connect( host, port, pass, info ),
-      events : events::EventDispatcher::new( ),
+      events : events::EventDispatcher::new( delim ),
     }
   }
   
@@ -24,7 +24,7 @@ impl Bot {
   }
   
   fn handle_dispatch ( &self, msg : message::Message ) {
-    self.events.handle_msg( msg );
+    self.events.handle_msg( msg, self );
   }
   
   pub fn start ( &self ) {
