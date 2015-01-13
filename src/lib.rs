@@ -5,7 +5,7 @@ pub mod bot;
 mod callback;
 pub mod command;
 mod console;
-mod events;
+pub mod events;
 
 // #[test]
 // fn it_works() {
