@@ -1,3 +1,4 @@
+use rustirc::client;
 use rustirc::message;
 
 use bot;
@@ -16,5 +17,5 @@ pub trait IrcCallback {
 }
 
 pub trait CmdCallback {
-  fn on_cmd ( &mut self, params : String, bot : &bot::Bot ) {}
+  fn on_cmd ( &mut self, params : String, cnt : &mut client::Client ) {}
 }
