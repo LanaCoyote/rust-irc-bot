@@ -3,13 +3,13 @@ extern crate rustirc;
 
 pub mod bot;
 mod callback;
-mod command;
+pub mod command;
 mod console;
 mod events;
 
 // #[test]
 // fn it_works() {
-  // let inf = rustirc::info::IrcInfo::gen( "Chefbot", "Chefbot", "Chefbot", 
+  // let inf = rustirc::info::IrcInfo::gen( "Chefbot", "Chefbot", "Chefbot",
     // vec! [ "#thefuture" ] );
   // let mut chef = bot::Bot::connect( "irc.gamesurge.net", 6667, "", inf );
   // chef.events.register_command( "[Hh]ello", Box::new( TestCallback ) );
@@ -33,7 +33,7 @@ mod events;
   // fn on_cmd ( &mut self, msg : rustirc::message::Message, cnt : &mut rustirc::client::Client ) {
     // println! ( "{}", msg.raw );
     // if msg.is_public( ) { return };
-    
+
     // let re      = regex::Regex::new( r"^!join (\S+)" ).unwrap( );
     // let outmsg  = match re.captures( msg.trailing( ).expect( "" ).as_slice( ) ) {
       // Some( cap ) => { format! ( "JOIN {}", cap.at( 1 ).unwrap( ) ) },
