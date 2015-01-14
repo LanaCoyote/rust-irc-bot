@@ -4,24 +4,24 @@ use rustirc::message;
 
 use bot;
 
-static WELCOME              : &str = "003";
-static ERR_NOSUCHNICK       : &str = "401";
-static ERR_NOSUCHSERVER     : &str = "402";
-static ERR_NOSUCHCHANNEL    : &str = "403";
-static ERR_CANNOTSENDTOCHAN : &str = "404";
-static ERR_TOOMANYCHANNELS  : &str = "405";
-static ERR_WASNOSUCHNICK    : &str = "406";
-static ERR_TOOMANYTARGETS   : &str = "407";
-static ERR_NOORIGIN         : &str = "409";
-static ERR_NORECIPIENT      : &str = "411";
-static ERR_NOTEXTTOSEND     : &str = "412";
-static ERR_NOTOPLEVEL       : &str = "413";
-static ERR_WILDTOPLEVEL     : &str = "414";
+static WELCOME              : &'static str = "003";
+static ERR_NOSUCHNICK       : &'static str = "401";
+static ERR_NOSUCHSERVER     : &'static str = "402";
+static ERR_NOSUCHCHANNEL    : &'static str = "403";
+static ERR_CANNOTSENDTOCHAN : &'static str = "404";
+static ERR_TOOMANYCHANNELS  : &'static str = "405";
+static ERR_WASNOSUCHNICK    : &'static str = "406";
+static ERR_TOOMANYTARGETS   : &'static str = "407";
+static ERR_NOORIGIN         : &'static str = "409";
+static ERR_NORECIPIENT      : &'static str = "411";
+static ERR_NOTEXTTOSEND     : &'static str = "412";
+static ERR_NOTOPLEVEL       : &'static str = "413";
+static ERR_WILDTOPLEVEL     : &'static str = "414";
 
 pub enum Code {
   Raw,
   Privmsg,
-  Other ( _ ),
+  Other ( String ),
 }
 
 pub trait Cmd {
@@ -55,16 +55,18 @@ impl <'cl> Command <'cl> {
   
   pub fn is_match ( &self, msg : message::Message ) -> bool {
     let cmpmsg = match self.code {
-      Raw             => msg.raw,
-      Privmsg         => {
+      Code::Raw             => msg.raw.as_slice( ),
+      Code::Privmsg         => {
         match msg.code.as_slice( ) {
-          "PRIVMSG" | "NOTICE" => msg.trailing( ).expect_or( String::new( ) ),
+          "PRIVMSG" | "NOTICE" => msg.trailing( ).unwrap_or( "" ),
           _                    => return false,
+        }
       },
-      Other ( code )  => {
-        match String::from_str( code ) {
-          msg.code => msg.trailing( ).expect_or( String::new( ) ),
-          _        => return false,
+      Code::Other ( ref cd ) => {
+        if msg.code == *cd {
+          msg.trailing( ).unwrap_or( "" )
+        } else {
+          return false;
         }
       },
     };

@@ -42,7 +42,7 @@ impl <'ed> EventDispatcher <'ed> {
   }
   
   pub fn register_code_command( &mut self, code : &str, patt : &str, cb : Box < command::Cmd + 'ed > ) {
-    let cmd = command::Command::new( patt, cb, command::Code::Other( code ));
+    let cmd = command::Command::new( patt, cb, command::Code::Other( String::from_str( code ) ));
     self.cmd_callbacks.push( cell::RefCell::new( cmd ) );
   }
 }
