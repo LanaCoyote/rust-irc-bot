@@ -1,7 +1,6 @@
 use rustirc::client;
 use rustirc::info;
 use rustirc::message;
-use std::sync::mpsc;
 
 use events;
 
@@ -19,7 +18,7 @@ impl <'bl> Bot <'bl> {
   }
   
   fn close ( &mut self ) {
-    //self.client.close( );
+    self.client.stop( );
     self.events.close( );
   }
   
@@ -28,9 +27,8 @@ impl <'bl> Bot <'bl> {
   }
   
   pub fn start ( mut self ) {
-    let mut tresult = self.client.start_thread( );
-    let mut rx      = tresult.0;
-    self.client     = tresult.1;
+    let (rx,cnt)    = self.client.start_thread( );
+    self.client     = cnt;
     for msg in rx.iter( ) {
       self.handle_dispatch( msg );
     }

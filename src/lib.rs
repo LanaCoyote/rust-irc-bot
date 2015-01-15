@@ -1,8 +1,8 @@
+#![allow(unstable)]
 extern crate regex;
 extern crate rustirc;
 
 pub mod bot;
-mod callback;
 pub mod command;
 mod console;
 pub mod events;

@@ -2,21 +2,8 @@ use regex;
 use rustirc::client;
 use rustirc::message;
 
-use bot;
-
-static WELCOME              : &'static str = "003";
-static ERR_NOSUCHNICK       : &'static str = "401";
-static ERR_NOSUCHSERVER     : &'static str = "402";
-static ERR_NOSUCHCHANNEL    : &'static str = "403";
-static ERR_CANNOTSENDTOCHAN : &'static str = "404";
-static ERR_TOOMANYCHANNELS  : &'static str = "405";
-static ERR_WASNOSUCHNICK    : &'static str = "406";
-static ERR_TOOMANYTARGETS   : &'static str = "407";
-static ERR_NOORIGIN         : &'static str = "409";
-static ERR_NORECIPIENT      : &'static str = "411";
-static ERR_NOTEXTTOSEND     : &'static str = "412";
-static ERR_NOTOPLEVEL       : &'static str = "413";
-static ERR_WILDTOPLEVEL     : &'static str = "414";
+#[allow(dead_code)]
+  static WELCOME              : &'static str = "003";
 
 pub enum Code {
   Raw,
@@ -25,9 +12,11 @@ pub enum Code {
 }
 
 pub trait Cmd {
+  #[allow(unused_variables)]
   fn on_cmd ( &mut self, msg : message::Message, cnt : &mut client::Client ) { }
 }
 
+#[allow(dead_code)]
 pub struct Command <'cl> {
   pattern : String,
   cb      : Box < Cmd + 'cl >,

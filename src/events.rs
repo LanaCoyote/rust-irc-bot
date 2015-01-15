@@ -1,10 +1,7 @@
-use regex;
 use rustirc::client;
 use rustirc::message;
 use std::cell;
 
-use bot;
-use callback;
 use command;
 
 pub struct EventDispatcher <'ed> {
