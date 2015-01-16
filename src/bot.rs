@@ -12,7 +12,7 @@ pub struct Bot <'bl> {
 impl <'bl> Bot <'bl> {
   pub fn connect <'a> ( host : &str, port : u16, pass : &str, info : info::IrcInfo ) -> Bot <'a> {
     Bot {
-      client : client::Client::connect( host, port, pass, info ),
+      client : client::Client::connect( host, port, pass, Box::new( info ) ),
       events : events::EventDispatcher::new( ),
     }
   }
