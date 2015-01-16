@@ -5,12 +5,12 @@ use rustirc::message;
 use events;
 
 pub struct Bot <'bl> {
-  pub client : client::Client,
+  pub client : client::Client <'bl>,
   pub events : events::EventDispatcher <'bl>,
 }
 
 impl <'bl> Bot <'bl> {
-  pub fn connect <'a> ( host : &str, port : u16, pass : &str, info : Box < info::IrcInfo > ) -> Bot <'a> {
+  pub fn connect <'a> ( host : &str, port : u16, pass : &str, info : Box < &'a mut info::IrcInfo > ) -> Bot <'a> {
     Bot {
       client : client::Client::connect( host, port, pass, info ),
       events : events::EventDispatcher::new( ),
