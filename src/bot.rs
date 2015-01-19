@@ -16,7 +16,7 @@ impl <'bl> Bot <'bl> {
     Bot {
       client : client::Client::connect( host, port, pass, info.clone( ) ),
       events : events::EventDispatcher::new( ),
-      help   : help::HelpHandler::new( info.nick_name.as_slice( ), "", "" ),
+      help   : help::HelpHandler::new( "Unnamed", "Someone", "0.0" ),
     }
   }
   

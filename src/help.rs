@@ -6,7 +6,7 @@ use std::time::duration::Duration;
 
 use command;
 
-struct HelpInfo {
+pub struct HelpInfo {
   pub name    : String,
   pub author  : String,
   pub version : String,
@@ -23,7 +23,7 @@ impl Clone for HelpInfo {
 }
 
 pub struct HelpHandler <'hl> {
-  info        : HelpInfo,
+  pub info    : HelpInfo,
   helpmap     : collections::HashMap < String, Vec < String > >,
 }
 
