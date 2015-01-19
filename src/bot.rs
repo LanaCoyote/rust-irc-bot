@@ -29,7 +29,7 @@ impl <'bl> Bot <'bl> {
     self.events.handle_msg( msg, &mut self.client );
   }
   
-  pub fn init_help ( &'bl mut self, cmd : &str, nice : &str ) {
+  pub fn init_help ( &mut self, cmd : &str, nice : &str ) {
     self.help.add_help( nice, "Provides help information for this bot." );
     self.events.register_command( cmd, Box::new( self.help.clone( ) ) );
   }
