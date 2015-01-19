@@ -5,6 +5,7 @@ extern crate rustirc;
 pub mod bot;
 pub mod command;
 mod console;
+pub mod help;
 pub mod events;
 
 // #[test]
