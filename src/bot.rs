@@ -2,6 +2,7 @@ use rustirc::client;
 use rustirc::info;
 use rustirc::message;
 
+use command;
 use events;
 use help;
 
@@ -29,9 +30,25 @@ impl <'bl> Bot <'bl> {
     self.events.handle_msg( msg, &mut self.client );
   }
   
+  pub fn add_help( &mut self, cmd : &str, help : &str ) {
+    self.help.add_help( cmd, help );
+  }
+  
   pub fn init_help ( &mut self, cmd : &str, nice : &str ) {
     self.help.add_help( nice, "Provides help information for this bot." );
     self.events.register_command( cmd, Box::new( self.help.clone( ) ) );
+  }
+  
+  pub fn add_cmd ( &mut self, patt : &str, cb : Box < command::Cmd + 'bl > ) {
+    self.events.register_command( patt, cb );
+  }
+  
+  pub fn add_raw_cmd ( &mut self, patt : &str, cb : Box < command::Cmd + 'bl > ) {
+    self.events.register_raw_command( patt, cb );
+  }
+  
+  pub fn add_code_cmd ( &mut self, code : &str, patt : &str, cb : Box < command::Cmd + 'bl > ) {
+    self.events.register_code_command( code, patt, cb );
   }
   
   pub fn set_help_info ( &mut self, name : &str, author : &str, version : &str ) {
