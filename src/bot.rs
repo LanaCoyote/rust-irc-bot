@@ -34,6 +34,12 @@ impl <'bl> Bot <'bl> {
     self.events.register_command( cmd, Box::new( self.help.clone( ) ) );
   }
   
+  pub fn set_help_info ( &mut self, name : &str, author : &str, version : &str ) {
+    self.help.info.name     = name.to_string( );
+    self.help.info.author   = author.to_string( );
+    self.help.info.version  = version.to_string( );
+  }
+  
   pub fn start ( mut self ) {
     let (rx,cnt)    = self.client.start_thread( );
     self.client     = cnt;
