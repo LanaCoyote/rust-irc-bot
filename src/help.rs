@@ -113,6 +113,6 @@ impl <'hl> command::Cmd for HelpHandler <'hl> {
   }
 }
 
-fn sleep( ms : usize ) {
-  return
+fn sleep( ms : i64 ) {
+  timer::sleep( Duration::milliseconds( ms ) )
 }

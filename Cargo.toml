@@ -4,6 +4,7 @@ name = "rustircbot"
 version = "0.1.1"
 authors = ["David Reeve <nerdboy6@gmail.com>"]
 
+[dependencies.regex]
 [dependencies.rustirc]
 
 git = "https://github.com/Lancey6/rust-irc"
